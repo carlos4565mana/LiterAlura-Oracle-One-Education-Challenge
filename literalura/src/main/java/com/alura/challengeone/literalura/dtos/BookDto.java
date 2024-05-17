@@ -5,7 +5,8 @@ import java.util.Map;
 
 public record BookDto(
         int id,
-       List<AuthorDto> authors,
+        String title,
+        List<AuthorDto> authors,
         List<String> subjects,
         List<String> languages,
         boolean copyright,
