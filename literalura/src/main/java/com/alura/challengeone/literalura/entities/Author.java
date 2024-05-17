@@ -1,14 +1,26 @@
 package com.alura.challengeone.literalura.entities;
 
-public class Author {
+import jakarta.persistence.*;
 
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+@Table(name="tb_author")
+public class Author implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true, nullable = false)
     private String name;
-
     private Integer birthYear;
-
     private Integer deathYear;
+    @ManyToMany(mappedBy = "authors")
+    private Set<Book> books = new HashSet<>();
 
     public Author() {
 

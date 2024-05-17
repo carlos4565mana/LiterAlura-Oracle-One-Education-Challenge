@@ -1,18 +1,38 @@
 package com.alura.challengeone.literalura.entities;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+@Entity
+@Table(name = "tb_book")
 public class Book implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true, nullable = false)
     private String title;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "book_author", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Set<Author> authos = new HashSet<>();
     private Set<String> languages = new HashSet<>();
     private Integer downloadCount;
 
+    public Book() {
 
+    }
+
+    public Book(String title, Set<Author> authos, Set<String> languages, Integer downloadCount) {
+        this.title = title;
+        this.authos = authos;
+        this.languages = languages;
+        this.downloadCount = downloadCount;
+    }
 
     public Long getId() {
         return id;

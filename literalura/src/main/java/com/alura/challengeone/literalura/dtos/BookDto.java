@@ -1,5 +1,7 @@
 package com.alura.challengeone.literalura.dtos;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +14,7 @@ public record BookDto(
         boolean copyright,
         String mediaType,
         Map<String, String> formats,
-        Integer downloadCount
+        @SerializedName("download_count") Integer downloadCount
 
 ) {
 }
