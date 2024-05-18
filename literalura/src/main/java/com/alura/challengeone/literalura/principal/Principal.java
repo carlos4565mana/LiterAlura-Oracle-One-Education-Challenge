@@ -9,6 +9,7 @@ import com.alura.challengeone.literalura.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Principal {
@@ -36,10 +37,16 @@ public class Principal {
                 5_ Listar Livro Por Idioma
                 0- Sair
                 """;
-
             System.out.println(menu);
-            opcao = sc.nextInt();
-            sc.nextLine();
+
+            try{
+                System.out.println("Escolha uma opção de (0 - 5)");
+                opcao = sc.nextInt();
+                sc.nextLine();
+            }catch (InputMismatchException err){
+                System.err.println("Não é permitido inserir letras, informe apenas números inteiros !");
+                sc.nextLine();
+            }
 
             switch (opcao){
                 case 1:
@@ -98,19 +105,21 @@ public class Principal {
 
     }
     private void getAllAuthorsAliveDuring(){
-        System.out.print("Digite um ano: ");
+       try{ System.out.print("Digite um ano: ");
         Integer year = sc.nextInt();
-        System.out.println("\n**************************");
-        authorService.getAllAuthorsAliveDuring(year)
-                .forEach(author -> {
-                    System.out.println("Name: " + author.getName());
-                    System.out.println("Birth Year: " + author.getBirthYear());
-                    System.out.println("Death Year: " + author.getDeathYear());
-                    System.out.println("---------------------------------");
-                });
-        System.out.println("\n**************************");
-
-
+           System.out.println("\n**************************");
+           authorService.getAllAuthorsAliveDuring(year)
+                   .forEach(author -> {
+                       System.out.println("Name: " + author.getName());
+                       System.out.println("Birth Year: " + author.getBirthYear());
+                       System.out.println("Death Year: " + author.getDeathYear());
+                       System.out.println("---------------------------------");
+                   });
+           System.out.println("\n**************************");
+       }catch (InputMismatchException err){
+           System.err.println("Não é permitido inserir letras, informe apenas números inteiros !");
+           sc.nextLine();
+       }
     }
 
     private void listAuthorsItem(){
