@@ -13,10 +13,15 @@ import java.util.Scanner;
 
 public class Principal {
     private Scanner sc = new Scanner(System.in);
-    @Autowired
+
     private BookService bookService;
-    @Autowired
+
     private AuthorService authorService;
+
+    public Principal(BookService bookService, AuthorService authorService) {
+        this.bookService = bookService;
+        this.authorService = authorService;
+    }
 
     public void exibeMenu() throws IOException, InterruptedException {
         var opcao = -1;
