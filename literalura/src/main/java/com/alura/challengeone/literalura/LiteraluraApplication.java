@@ -14,17 +14,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class LiteraluraApplication implements CommandLineRunner {
 
-
-	public LiteraluraApplication(AuthorService service, BookService bookService) {
-		this.service = service;
-		this.bookService = bookService;
-	}
-
 	public static void main(String[] args) {
 		SpringApplication.run(LiteraluraApplication.class, args);
 	}
-	private AuthorService service;
-	private BookService bookService;
+
 	@Override
 	public void run(String... args) throws Exception {
 		Principal principal = new Principal();
@@ -47,6 +40,7 @@ public class LiteraluraApplication implements CommandLineRunner {
 		System.out.println("\n**************************");*/
 
 	}
+
 }
 
 

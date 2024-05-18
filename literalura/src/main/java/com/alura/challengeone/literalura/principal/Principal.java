@@ -3,6 +3,7 @@ package com.alura.challengeone.literalura.principal;
 import com.alura.challengeone.literalura.converter.BookConverter;
 import com.alura.challengeone.literalura.dtos.BookDto;
 import com.alura.challengeone.literalura.entities.Book;
+import com.alura.challengeone.literalura.services.AuthorService;
 import com.alura.challengeone.literalura.services.BookApi;
 import com.alura.challengeone.literalura.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,12 @@ public class Principal {
     private Scanner sc = new Scanner(System.in);
     @Autowired
     private BookService bookService;
+    @Autowired
+    private AuthorService authorService;
 
-    public void exibeMenu(){
+    public void exibeMenu() throws IOException, InterruptedException {
         var opcao = -1;
+
         while(opcao != 0){
             var menu = """
                 
@@ -38,10 +42,12 @@ public class Principal {
                     break;
 
                 case 2:
+                    getAllRegisteredBooks();
                     break;
                 case 3:
                     break;
                 case 4:
+                    getAllAuthorsAliveDuring();
                     break;
                 case 5:
                     break;
@@ -54,12 +60,18 @@ public class Principal {
         }
     }
 
-    private void searchBookByTitle() throws IOException, InterruptedException {
+    private void searchBookByTitle()  {
 
-        BookDto book = BookApi.get("William Shakespeare");
-        Book bookEntity = BookConverter.convertFromDto(book, bookService);
-        //System.out.println(bookService.save(bookEntity));
+        System.out.print("Digite: ");
+        String input = sc.nextLine();
+        try{
+            BookDto book = BookApi.get(input);
+            Book bookEntity = BookConverter.convertFromDto(book, authorService);
+            System.out.println(bookService.save(bookEntity));
 
+        }catch (IOException | InterruptedException | IndexOutOfBoundsException e){
+            System.out.println("Ocorreu um error: " + e.getMessage());
+        }
 
     }
 
@@ -76,6 +88,21 @@ public class Principal {
                     System.out.println("---------------------------------");
                 });
         System.out.println("\n**************************");
+
+    }
+    private void getAllAuthorsAliveDuring(){
+        System.out.print("Digite um ano: ");
+        Integer year = sc.nextInt();
+        System.out.println("\n**************************");
+        authorService.getAllAuthorsAliveDuring(year)
+                .forEach(author -> {
+                    System.out.println("Name: " + author.getName());
+                    System.out.println("Birth Year: " + author.getBirthYear());
+                    System.out.println("Death Year: " + author.getDeathYear());
+                    System.out.println("---------------------------------");
+                });
+        System.out.println("\n**************************");
+
 
     }
 }
