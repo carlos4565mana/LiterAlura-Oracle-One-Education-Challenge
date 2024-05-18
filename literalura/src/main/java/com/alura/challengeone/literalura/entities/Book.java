@@ -50,7 +50,7 @@ public class Book implements Serializable {
         this.title = title;
     }
 
-    public Set<Author> getAuthos() {
+    public Set<Author> getAuthors() {
         return authors;
     }
 

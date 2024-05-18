@@ -45,11 +45,13 @@ public class Principal {
                     getAllRegisteredBooks();
                     break;
                 case 3:
+                    listAuthorsItem();
                     break;
                 case 4:
                     getAllAuthorsAliveDuring();
                     break;
                 case 5:
+                    listBookByLanguage();
                     break;
                 case 0:
                     System.out.println("Saindo...");
@@ -81,7 +83,7 @@ public class Principal {
                 .forEach(bookFor ->{
                     System.out.println("Title: " + bookFor.getTitle());
                     System.out.print("Author: ");
-                    bookFor.getAuthos().forEach(author -> System.out.print(author.getName()));
+                    bookFor.getAuthors().forEach(author -> System.out.print(author.getName()));
                     System.out.println();
                     System.out.println("Languagens: "+bookFor.getLanguages());
                     System.out.println("Download Count: "+bookFor.getDownloadCount());
@@ -103,6 +105,40 @@ public class Principal {
                 });
         System.out.println("\n**************************");
 
+
+    }
+
+    private void listAuthorsItem(){
+        System.out.println("\n**************************");
+        authorService.getAll()
+                        .forEach(author -> {
+                            System.out.println("Name: " + author.getName());
+                            System.out.println("Birth Year: " + author.getBirthYear());
+                            System.out.println("Death Year: " + author.getDeathYear());
+                            System.out.println("---------------------------------");
+                        });
+        System.out.println("\n**************************");
+
+    }
+
+    private void listBookByLanguage(){
+        System.out.print("Digite um idioma: ");
+        String input = sc.nextLine();
+        System.out.println("\n**************************");
+        bookService.getAll()
+                .stream()
+                .filter(book -> book.getLanguages().contains(input))
+                .forEach(book -> {
+                    System.out.println("Title: " + book.getTitle());
+                    System.out.print("Authors: ");
+                    book.getAuthors().forEach(author -> System.out.print(author.getName()));
+                    System.out.println();
+                    System.out.println("Languages: " + book.getLanguages());
+                    System.out.println("Download Count: " + book.getDownloadCount());
+                    System.out.println("---------------------------------");
+
+                });
+        System.out.println("\n**************************");
 
     }
 }

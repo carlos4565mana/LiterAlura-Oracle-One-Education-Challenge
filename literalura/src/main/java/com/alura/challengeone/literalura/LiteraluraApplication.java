@@ -23,22 +23,6 @@ public class LiteraluraApplication implements CommandLineRunner {
 		Principal principal = new Principal();
 		principal.exibeMenu();
 
-		/*
-
-
-
-		System.out.println("\n**************************");
-
-		service.getAllAuthorsAliveDuring(1851)
-				.forEach(author -> {
-					System.out.println("Name: "+author.getName());
-					System.out.println("Birth Year: " + author.getBirthYear());
-					System.out.println("Death Year: " + author.getDeathYear());
-					System.out.println("---------------------------------");
-				});
-
-		System.out.println("\n**************************");*/
-
 	}
 
 }

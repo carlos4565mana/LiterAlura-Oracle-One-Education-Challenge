@@ -40,6 +40,10 @@ public class AuthorService {
 
     }
 
+    public List<Author> getAll(){
+        return repository.findAll();
+    }
+
     public List<Author> getAllAuthorsAliveDuring(Integer year){
         return repository.findAuthorsAliveDuring(year);
     }
