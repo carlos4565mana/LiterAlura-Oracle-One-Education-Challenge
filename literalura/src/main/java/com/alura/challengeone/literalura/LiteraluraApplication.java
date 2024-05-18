@@ -3,6 +3,7 @@ package com.alura.challengeone.literalura;
 import com.alura.challengeone.literalura.converter.BookConverter;
 import com.alura.challengeone.literalura.dtos.BookDto;
 import com.alura.challengeone.literalura.entities.Book;
+import com.alura.challengeone.literalura.principal.Principal;
 import com.alura.challengeone.literalura.services.AuthorService;
 import com.alura.challengeone.literalura.services.BookApi;
 import com.alura.challengeone.literalura.services.BookService;
@@ -26,21 +27,11 @@ public class LiteraluraApplication implements CommandLineRunner {
 	private BookService bookService;
 	@Override
 	public void run(String... args) throws Exception {
-		BookDto book = BookApi.get("William Shakespeare");
-		Book bookEntity = BookConverter.convertFromDto(book, service);
-		//System.out.println(bookService.save(bookEntity));
-		System.out.println("\n**************************");
-		bookService.getAll()
-				.forEach(bookFor ->{
-					System.out.println("Title: " + bookFor.getTitle());
-					System.out.print("Author: ");
-					bookFor.getAuthos().forEach(author -> System.out.print(author.getName()));
-					System.out.println();
-					System.out.println("Languagens: "+bookFor.getLanguages());
-					System.out.println("Download Count: "+bookFor.getDownloadCount());
-					System.out.println("---------------------------------");
-				});
-		System.out.println("\n**************************");
+		Principal principal = new Principal();
+		principal.exibeMenu();
+
+		/*
+
 
 
 		System.out.println("\n**************************");
@@ -53,7 +44,7 @@ public class LiteraluraApplication implements CommandLineRunner {
 					System.out.println("---------------------------------");
 				});
 
-		System.out.println("\n**************************");
+		System.out.println("\n**************************");*/
 
 	}
 }
