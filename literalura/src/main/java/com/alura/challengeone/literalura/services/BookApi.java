@@ -20,7 +20,7 @@ public class BookApi {
     public static BookDto get(String bookName) throws IOException, InterruptedException {
 
         String encodedBook = URLEncoder.encode(bookName, StandardCharsets.UTF_8.toString());
-        String fullURL = BASE_URL + "/?search" + encodedBook;
+        String fullURL = BASE_URL + "/?search=" + encodedBook;
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(fullURL))

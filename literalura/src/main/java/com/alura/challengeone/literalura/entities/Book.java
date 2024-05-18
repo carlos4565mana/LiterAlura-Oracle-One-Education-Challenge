@@ -19,7 +19,7 @@ public class Book implements Serializable {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "book_author", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "author_id"))
-    private Set<Author> authos = new HashSet<>();
+    private Set<Author> authors = new HashSet<>();
     private Set<String> languages = new HashSet<>();
     private Integer downloadCount;
 
@@ -29,7 +29,7 @@ public class Book implements Serializable {
 
     public Book(String title, Set<Author> authos, Set<String> languages, Integer downloadCount) {
         this.title = title;
-        this.authos = authos;
+        this.authors = authos;
         this.languages = languages;
         this.downloadCount = downloadCount;
     }
@@ -51,11 +51,11 @@ public class Book implements Serializable {
     }
 
     public Set<Author> getAuthos() {
-        return authos;
+        return authors;
     }
 
     public void setAuthos(Set<Author> authos) {
-        this.authos = authos;
+        this.authors = authos;
     }
 
     public Set<String> getLanguages() {
@@ -79,7 +79,7 @@ public class Book implements Serializable {
         return "Book{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", authos=" + authos +
+                ", authos=" + authors +
                 ", languages=" + languages +
                 ", downloadCount=" + downloadCount +
                 '}';

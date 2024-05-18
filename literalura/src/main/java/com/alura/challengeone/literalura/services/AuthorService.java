@@ -7,6 +7,7 @@ import com.alura.challengeone.literalura.repositories.AuthorRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -37,6 +38,10 @@ public class AuthorService {
     public  Optional<Author> get(String name) {
        return repository.findByName(name);
 
+    }
+
+    public List<Author> getAllAuthorsAliveDuring(Integer year){
+        return repository.findAuthorsAliveDuring(year);
     }
 }
 
