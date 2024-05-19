@@ -41,7 +41,7 @@ public class Principal {
             System.out.println(menu);
 
             try{
-                System.out.println("Escolha uma opção de (0 - 5)");
+                System.out.println("Escolha uma opção de (0 - 6)");
                 opcao = sc.nextInt();
                 sc.nextLine();
             }catch (InputMismatchException err){
