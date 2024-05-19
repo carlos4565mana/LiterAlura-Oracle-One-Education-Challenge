@@ -35,6 +35,7 @@ public class Principal {
                 3- Listar Autores Cadastrados
                 4- Lista Autor Vivo em um determinado Ano
                 5_ Listar Livro Por Idioma
+                6_ Listar Os Cincos Melhors Livros Por Downloads
                 0- Sair
                 """;
             System.out.println(menu);
@@ -64,6 +65,9 @@ public class Principal {
                     break;
                 case 5:
                     listBookByLanguage();
+                    break;
+                case 6:
+                    getTopFiveBooks();
                     break;
                 case 0:
                     System.out.println("Saindo...");
@@ -136,12 +140,36 @@ public class Principal {
     }
 
     private void listBookByLanguage(){
+        var idiomas = """
+                pt- portugues
+                en- inglês
+                es- espanhol
+                fr- frances
+                """;
+        System.out.println(idiomas);
         System.out.print("Digite um idioma: ");
         String input = sc.nextLine();
         System.out.println("\n**************************");
         bookService.getAll()
                 .stream()
                 .filter(book -> book.getLanguages().contains(input))
+                .forEach(book -> {
+                    System.out.println("Title: " + book.getTitle());
+                    System.out.print("Authors: ");
+                    book.getAuthors().forEach(author -> System.out.print(author.getName()));
+                    System.out.println();
+                    System.out.println("Languages: " + book.getLanguages());
+                    System.out.println("Download Count: " + book.getDownloadCount());
+                    System.out.println("---------------------------------");
+
+                });
+        System.out.println("\n**************************");
+
+    }
+    private void getTopFiveBooks(){
+
+        bookService.getTopFive()
+                .stream()
                 .forEach(book -> {
                     System.out.println("Title: " + book.getTitle());
                     System.out.print("Authors: ");

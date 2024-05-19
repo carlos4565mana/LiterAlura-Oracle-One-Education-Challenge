@@ -28,6 +28,10 @@ public class BookService {
         return repository.findAll();
     }
 
+    public List<Book> getTopFive(){
+        return repository.findTop5ByOrderByDownloadCountDesc();
+    }
+
 
 
 }
